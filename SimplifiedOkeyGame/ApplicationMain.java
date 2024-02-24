@@ -78,7 +78,13 @@ public class ApplicationMain {
                     System.out.print("Discard the tile in index: ");
                     playerChoice = sc.nextInt();
 
-                    // TODO: make sure the given index is correct, should be 0 <= index <= 14
+                    // todo1 complete make sure the given index is correct, should be 0 <= index <= 14
+                    while((playerChoice<0)||(playerChoice>14))
+                    {
+                        System.out.println("Not an applicable choice!");
+                        System.out.print("Discard the tile in index: ");
+                        playerChoice = sc.nextInt();
+                    }
 
                     game.discardTile(playerChoice);
                     game.passTurnToNextPlayer();
@@ -89,9 +95,24 @@ public class ApplicationMain {
                         System.out.println("Congratulations, you win!");    
                     }
                     else{
-                        // TODO: the game ended with no more tiles in the stack
+                        // todo2 complete the game ended with no more tiles in the stack
                         // determine the winner based on longest chain lengths of the players
                         // use getPlayerWithHighestLongestChain method of game for this task
+                        System.out.println("Game finished with no more tiles in the stack.");
+                        if(game.getPlayerWithHighestLongestChain().length>1){
+                            String winResult = "";
+                            for (Player player : game.getPlayerWithHighestLongestChain()) {
+                                winResult += player.getName() +" ";
+                            }
+                            System.out.println("Winners are:  " +winResult);
+                        }
+                        else{
+                            String winResult = "";
+                            for (Player player : game.getPlayerWithHighestLongestChain()) {
+                                winResult += player.getName();
+                            }
+                            System.out.println("Winner is: " +winResult);
+                        }
                     }
                 }
             }
@@ -117,9 +138,24 @@ public class ApplicationMain {
                         System.out.println(game.getCurrentPlayerName() + " wins.");
                     }
                     else{
-                        // TODO: the game ended with no more tiles in the stack
+                        // todo3 complete the game ended with no more tiles in the stack
                         // determine the winner based on longest chain lengths of the players
                         // use getPlayerWithHighestLongestChain method of game for this task
+                        System.out.println("Game finished with no more tiles in the stack.");
+                        if(game.getPlayerWithHighestLongestChain().length>1){
+                            String winResult = "";
+                            for (Player player : game.getPlayerWithHighestLongestChain()) {
+                                winResult += player.getName() +" ";
+                            }
+                            System.out.println("Winners are:  " +winResult);
+                        }
+                        else{
+                            String winResult = "";
+                            for (Player player : game.getPlayerWithHighestLongestChain()) {
+                                winResult += player.getName();
+                            }
+                            System.out.println("Winner is: " +winResult);
+                        }
                     }
                 }
             }
