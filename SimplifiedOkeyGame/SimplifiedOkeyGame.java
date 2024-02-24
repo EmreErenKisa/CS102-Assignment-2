@@ -81,12 +81,31 @@ public class SimplifiedOkeyGame {
         return false;
     }
 
-    /* TODO: finds the player who has the highest number for the longest chain
+    /* finds the player who has the highest number for the longest chain
      * if multiple players have the same length may return multiple players
      */
     public Player[] getPlayerWithHighestLongestChain() {
-        Player[] winners = new Player[1];
+        int longestChain = players[0].findLongestChain();
+        int winnerNumber = 0;
 
+        for (int i = 1; i < players.length; i++) {
+            if (players[i].findLongestChain() > longestChain) {
+                longestChain = players[i].findLongestChain();
+            }
+        }
+        for (Player player : players) {
+            if (player.findLongestChain() == longestChain) {
+                winnerNumber++;
+            }
+        }
+        Player[] winners = new Player[winnerNumber];
+
+        for (Player player : players) {
+            if (player.findLongestChain() == longestChain) {
+                winners[winnerNumber] = player;
+                winnerNumber--;
+            }
+        }
         return winners;
     }
     
@@ -98,14 +117,23 @@ public class SimplifiedOkeyGame {
     }
 
     /*
-     * TODO: pick a tile for the current computer player using one of the following:
+     * pick a tile for the current computer player using one of the following:
      * - picking from the tiles array using getTopTile()
      * - picking from the lastDiscardedTile using getLastDiscardedTile()
      * you should check if getting the discarded tile is useful for the computer
      * by checking if it increases the longest chain length, if not get the top tile
      */
     public void pickTileForComputer() {
-
+        int initialChainLength = players[currentPlayerIndex].findLongestChain();
+        players[currentPlayerIndex].addTile(lastDiscardedTile);
+        
+        if ( players[currentPlayerIndex].findLongestChain() == initialChainLength ) {
+            getTopTile();
+        }
+        else{
+            getLastDiscardedTile();
+        }
+        discardTile( players[currentPlayerIndex].findPositionOfTile(lastDiscardedTile) );
     }
 
     /*
@@ -117,12 +145,13 @@ public class SimplifiedOkeyGame {
     }
 
     /*
-     * TODO: discards the current player's tile at given index
+     * discards the current player's tile at given index
      * this should set lastDiscardedTile variable and remove that tile from
      * that player's tiles
      */
     public void discardTile(int tileIndex) {
-
+        players[currentPlayerIndex].getAndRemoveTile(tileIndex);
+        lastDiscardedTile = players[currentPlayerIndex].playerTiles[tileIndex];
     }
 
     public void displayDiscardInformation() {
