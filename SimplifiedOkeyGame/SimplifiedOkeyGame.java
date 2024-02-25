@@ -101,7 +101,7 @@ public class SimplifiedOkeyGame {
         if(players[currentPlayerIndex].checkWinning()){
             return true;
         }
-        else if(tiles==null){
+        else if(topTileIndex==104){
             return true;
         }
         else{
