@@ -131,7 +131,7 @@ public class SimplifiedOkeyGame {
 
         for (Player player : players) {
             if (player.findLongestChain() == longestChain) {
-                winners[winnerNumber] = player;
+                winners[winnerNumber - 1] = player;
                 winnerNumber--;
             }
         }

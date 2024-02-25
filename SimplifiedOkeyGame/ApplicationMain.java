@@ -102,8 +102,9 @@ public class ApplicationMain {
                         if(game.getPlayerWithHighestLongestChain().length>1){
                             String winResult = "";
                             for (Player player : game.getPlayerWithHighestLongestChain()) {
-                                winResult += player.getName() +" ";
+                                winResult += player.getName() +", ";
                             }
+                            winResult = winResult.substring(0, winResult.length() - 2);
                             System.out.println("Winners are:  " +winResult);
                         }
                         else{
@@ -145,8 +146,9 @@ public class ApplicationMain {
                         if(game.getPlayerWithHighestLongestChain().length>1){
                             String winResult = "";
                             for (Player player : game.getPlayerWithHighestLongestChain()) {
-                                winResult += player.getName() +" ";
+                                winResult += player.getName() +", ";
                             }
+                            winResult = winResult.substring(0, winResult.length() - 2);
                             System.out.println("Winners are:  " +winResult);
                         }
                         else{
