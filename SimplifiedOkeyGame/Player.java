@@ -80,7 +80,6 @@ public class Player {
             }
                 playerHand[k] = playerTiles[i];
                 k++;
-            
         }
         playerTiles = null;
         playerTiles = playerHand;
@@ -98,29 +97,36 @@ public class Player {
         if(numberOfTiles == 0)
         {
             playerTiles[0] = t;
-            numberOfTiles++;
         }
-        else
-        {
-            for(int i=0;i<numberOfTiles;i++ )
-            {
-                Tile temp = new Tile(1);
-                if(playerTiles[i].getValue()>=t.getValue())
-                {
-                    for(int j = numberOfTiles;j>=i+1;j--)
-                    {
-                        temp = playerTiles[j];
-                        playerTiles[j] = playerTiles[j-1];
-                        playerTiles[j-1] = temp;
+
+        boolean inserted = false;
+        for (int i = 0; i < numberOfTiles; i++) {
+            if (playerTiles[i].getValue() <= t.getValue()){
+                inserted = true;
+                if (playerTiles[i + 1] != null && playerTiles[i + 1].getValue() >= t.getValue()){
+                    for (int j = numberOfTiles - 1; j >= i + 1; j--) {
+                        playerTiles[j + 1] = playerTiles[j];
                     }
-                    playerTiles[i] = t;
-                    numberOfTiles++;
+                    playerTiles[i + 1] = t;
                     break;
+                } else if (playerTiles[i + 1] == null) {
+                    playerTiles[i + 1] = t;
                 }
-                
             }
-            
         }
+
+        if(numberOfTiles > 14){
+            System.out.println();
+        }
+
+        if (!inserted && numberOfTiles != 0){
+            for (int i = numberOfTiles - 1; i >= 0; i--) {
+                playerTiles[i + 1] = playerTiles[i];
+            }
+            playerTiles[0] = t;
+        }
+
+        numberOfTiles++;
     }
 
     /*
