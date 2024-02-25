@@ -42,6 +42,7 @@ public class SimplifiedOkeyGame {
             for (int j = 0; j < 14; j++) {
                 players[i].addTile(tiles[tileCounter]);
                 tiles[tileCounter++] = null;
+                tileCount--;
             }
         }
 
@@ -67,9 +68,13 @@ public class SimplifiedOkeyGame {
      * returns the toString method of the tile so that we can print what we picked
      */
     public String getTopTile() {
+        if (topTileIndex == 104){
+            System.out.println();
+        }
         Tile topTile = tiles[topTileIndex];
         tiles[topTileIndex++] = null;
         players[currentPlayerIndex].addTile(topTile);
+        tileCount--;
         return topTile.toString();
     }
 
@@ -139,7 +144,7 @@ public class SimplifiedOkeyGame {
      * checks if there are more tiles on the stack to continue the game
      */
     public boolean hasMoreTileInStack() {
-        return tileCount != 0;
+        return tileCount != 1;
     }
 
     /*
@@ -157,12 +162,17 @@ public class SimplifiedOkeyGame {
             int index = players[currentPlayerIndex].findPositionOfTile(lastDiscardedTile);
             players[currentPlayerIndex].getAndRemoveTile(index);
             getTopTile();
+            System.out.println("Got top tile");
         }
         else{
             int index = players[currentPlayerIndex].findPositionOfTile(lastDiscardedTile);
             players[currentPlayerIndex].getAndRemoveTile(index);
             getLastDiscardedTile();
+            System.out.println("Got discarded");
         }
+
+        System.out.println(players[currentPlayerIndex].getName() + "'s cards after playing:");
+        players[currentPlayerIndex].displayTiles();
     }
 
     /*
@@ -176,9 +186,13 @@ public class SimplifiedOkeyGame {
             for (int j = i + 1; j < currentPlayer.numberOfTiles; j++) {
                 if ( currentPlayer.playerTiles[i].compareTo(currentPlayer.playerTiles[j]) == 0 ) {
                     discardTile(i);
+                    return;
                 }
             }
         }
+
+        discardTile(0);
+
     }
 
     /*
@@ -187,8 +201,7 @@ public class SimplifiedOkeyGame {
      * that player's tiles
      */
     public void discardTile(int tileIndex) {
-        players[currentPlayerIndex].getAndRemoveTile(tileIndex);
-        lastDiscardedTile = players[currentPlayerIndex].playerTiles[tileIndex];
+        lastDiscardedTile = players[currentPlayerIndex].getAndRemoveTile(tileIndex);
     }
 
     public void displayDiscardInformation() {
