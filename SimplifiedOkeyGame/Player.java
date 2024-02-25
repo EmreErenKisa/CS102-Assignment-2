@@ -18,7 +18,7 @@ public class Player {
      */
     public boolean checkWinning() {
         int count = 0;
-        for(int i = 0; i<playerTiles.length-1; i++ )
+        for(int i = 0; i<numberOfTiles; i++ )
         {
             if(playerTiles[i+1].getValue() - playerTiles[i].getValue() == 1)
             {
@@ -44,7 +44,7 @@ public class Player {
     public int findLongestChain() {
         int count = 0;
         int longestChain = 0;
-        for(int i = 0; i<playerTiles.length-1; i++ )
+        for(int i = 0; i<numberOfTiles; i++ )
         {
             if((playerTiles[i+1].getValue() - playerTiles[i].getValue() == 1))
             {
@@ -95,7 +95,7 @@ public class Player {
      * then shift the remaining tiles to the right by one
      */
     public void addTile(Tile t) {
-        if(playerTiles.length == 0)
+        if(numberOfTiles == 0)
         {
             playerTiles[0] = t;
             numberOfTiles++;
@@ -114,11 +114,12 @@ public class Player {
                         playerTiles[j-1] = temp;
                     }
                     playerTiles[i] = t;
+                    numberOfTiles++;
                     break;
                 }
-                numberOfTiles++;
+                
             }
-             
+            
         }
     }
 
