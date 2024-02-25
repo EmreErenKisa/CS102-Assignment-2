@@ -75,12 +75,12 @@ public class Player {
         Tile removedTile = playerTiles[index];
         for(int i=0,k=0; i<numberOfTiles; i++)
         {
-            if(i == index)
+            if(i != index)
             {
-                continue;
+                playerHand[k] = playerTiles[i];
+                k++; 
             }
-            playerHand[k] = playerTiles[i];
-            k++;
+            
         }
         playerTiles = playerHand;
         numberOfTiles--;   
