@@ -101,6 +101,9 @@ public class SimplifiedOkeyGame {
         if(players[currentPlayerIndex].checkWinning()){
             return true;
         }
+        else if(tiles==null){
+            return true;
+        }
         else{
             return false;
         }
@@ -173,13 +176,13 @@ public class SimplifiedOkeyGame {
         Player currentPlayer = players[currentPlayerIndex];
 
         for (int i = 0; i < currentPlayer.numberOfTiles; i++) {
-            if (!currentPlayer.playerTiles[i].canFormChainWith(currentPlayer.playerTiles[i + 1])) {
-                discardTile(i);
-                break;
+            for (int j = i + 1; j < currentPlayer.numberOfTiles; j++) {
+                if ( currentPlayer.playerTiles[i].compareTo(currentPlayer.playerTiles[j]) == 0 ) {
+                    discardTile(i);
+                    i = currentPlayer.numberOfTiles;
+                }
             }
         }
-
-        
     }
 
     /*
