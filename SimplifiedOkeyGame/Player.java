@@ -83,7 +83,8 @@ public class Player {
             
         }
         playerTiles = null;
-        playerTiles = playerHand;   
+        playerTiles = playerHand;
+        numberOfTiles--;   
 
         return playerTiles[index];
     }
