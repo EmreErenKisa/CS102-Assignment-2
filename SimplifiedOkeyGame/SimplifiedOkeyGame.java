@@ -176,10 +176,20 @@ public class SimplifiedOkeyGame {
         Player currentPlayer = players[currentPlayerIndex];
 
         for (int i = 0; i < currentPlayer.numberOfTiles; i++) {
-            for (int j = i + 1; j < currentPlayer.numberOfTiles; j++) {
-                if ( currentPlayer.playerTiles[i].compareTo(currentPlayer.playerTiles[j]) == 0 ) {
-                    discardTile(i);
-                    i = currentPlayer.numberOfTiles;
+            if (i == currentPlayer.numberOfTiles - 1) {
+                discardTile(i);
+                break;
+            }
+            else {
+                if (!currentPlayer.playerTiles[i].canFormChainWith(currentPlayer.playerTiles[i + 1])) {
+                    if (i == 0) {
+                        discardTile(i);
+                        break;
+                    }
+                    else {
+                        discardTile(i + 1);
+                        break;
+                    }
                 }
             }
         }
