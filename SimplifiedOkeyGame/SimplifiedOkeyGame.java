@@ -176,6 +176,7 @@ public class SimplifiedOkeyGame {
             for (int j = i + 1; j < currentPlayer.numberOfTiles; j++) {
                 if ( currentPlayer.playerTiles[i].compareTo(currentPlayer.playerTiles[j]) == 0 ) {
                     discardTile(i);
+                    i = currentPlayer.numberOfTiles;
                 }
             }
         }
