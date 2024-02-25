@@ -95,14 +95,13 @@ public class Player {
      * then shift the remaining tiles to the right by one
      */
     public void addTile(Tile t) {
-        if(numberOfTiles == 0)
+        if(playerTiles.length == 0)
         {
             playerTiles[0] = t;
             numberOfTiles++;
         }
         else
         {
-            numberOfTiles++;
             for(int i=0;i<numberOfTiles;i++ )
             {
                 Tile temp = new Tile(1);
@@ -114,10 +113,12 @@ public class Player {
                         playerTiles[j] = playerTiles[j-1];
                         playerTiles[j-1] = temp;
                     }
-                    playerTiles[i+1] = t;
+                    playerTiles[i] = t;
                     break;
                 }
-            } 
+                numberOfTiles++;
+            }
+             
         }
     }
 
