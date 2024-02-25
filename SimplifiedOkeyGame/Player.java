@@ -94,21 +94,30 @@ public class Player {
      * then shift the remaining tiles to the right by one
      */
     public void addTile(Tile t) {
-        for(int i=0;i<playerTiles.length-1;i++ )
+        if(numberOfTiles == 0)
         {
-            Tile temp = new Tile(1);
-            if(playerTiles[i].getValue()>=t.getValue())
+            playerTiles[0] = t;
+            numberOfTiles++;
+        }
+        else
+        {
+            numberOfTiles++;
+            for(int i=0;i<numberOfTiles;i++ )
             {
-                for(int j = playerTiles.length-1;j>=i+1;j--)
+                Tile temp = new Tile(1);
+                if(playerTiles[i].getValue()>=t.getValue())
                 {
-                    temp = playerTiles[j];
-                    playerTiles[j] = playerTiles[j-1];
-                    playerTiles[j-1] = temp;
+                    for(int j = numberOfTiles;j>=i+1;j--)
+                    {
+                        temp = playerTiles[j];
+                        playerTiles[j] = playerTiles[j-1];
+                        playerTiles[j-1] = temp;
+                    }
+                    playerTiles[i+1] = t;
+                    break;
                 }
-                playerTiles[i+1] = t;
-                break;
-            }
-        } 
+            } 
+        }
     }
 
     /*
