@@ -1,3 +1,4 @@
+import java.util.Random;
 public class SimplifiedOkeyGame {
 
     Player[] players;
@@ -80,7 +81,20 @@ public class SimplifiedOkeyGame {
      * TODO: should randomly shuffle the tiles array before game starts
      */
     public void shuffleTiles() {
-
+        Tile[] shuffledTiles = new Tile[104];
+        Random rand = new Random();
+        int randomIndex;
+        
+        for(int i = 0; i<104; i++){
+            randomIndex = rand.nextInt(104);
+            if(shuffledTiles[randomIndex]==null) {
+                shuffledTiles[randomIndex] = tiles[i];
+            }
+            else{
+                i--;
+            }
+        }
+        tiles = shuffledTiles;
     }
 
     /*
@@ -88,7 +102,13 @@ public class SimplifiedOkeyGame {
      * finished the game. use checkWinning method of the player class to determine
      */
     public boolean didGameFinish() {
-        return false;
+        if(players[currentPlayerIndex].checkWinning()){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
     }
 
     /* finds the player who has the highest number for the longest chain
