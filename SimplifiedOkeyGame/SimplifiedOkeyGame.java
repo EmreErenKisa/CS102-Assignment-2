@@ -4,7 +4,7 @@ public class SimplifiedOkeyGame {
     Player[] players;
     Tile[] tiles;
     int tileCount;
-
+    int topTileIndex;
     Tile lastDiscardedTile;
 
     int currentPlayerIndex = 0;
@@ -45,7 +45,7 @@ public class SimplifiedOkeyGame {
             }
         }
 
-        // Top tile is either at index 57 or at 103 since [0,56] is set to null
+        topTileIndex = 57;
     }
 
     /*
@@ -67,10 +67,9 @@ public class SimplifiedOkeyGame {
      * returns the toString method of the tile so that we can print what we picked
      */
     public String getTopTile() {
-        int topTileIndex = 57;
         Tile topTile = tiles[topTileIndex];
+        tiles[topTileIndex++] = null;
         players[currentPlayerIndex].addTile(topTile);
-        topTileIndex++;
         return topTile.toString();
     }
 
@@ -155,12 +154,15 @@ public class SimplifiedOkeyGame {
         players[currentPlayerIndex].addTile(lastDiscardedTile);
         
         if ( players[currentPlayerIndex].findLongestChain() == initialChainLength ) {
+            int index = players[currentPlayerIndex].findPositionOfTile(lastDiscardedTile);
+            players[currentPlayerIndex].getAndRemoveTile(index);
             getTopTile();
         }
         else{
+            int index = players[currentPlayerIndex].findPositionOfTile(lastDiscardedTile);
+            players[currentPlayerIndex].getAndRemoveTile(index);
             getLastDiscardedTile();
         }
-        discardTile( players[currentPlayerIndex].findPositionOfTile(lastDiscardedTile) );
     }
 
     /*

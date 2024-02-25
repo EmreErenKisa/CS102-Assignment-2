@@ -71,21 +71,21 @@ public class Player {
      * removes and returns the tile in given index position
      */
     public Tile getAndRemoveTile(int index) {
-        Tile[] playerHand = new Tile[playerTiles.length-1]; 
+        Tile[] playerHand = new Tile[playerTiles.length];
+        Tile removedTile = playerTiles[index];
         for(int i=0,k=0; i<numberOfTiles; i++)
         {
             if(i == index)
             {
                 continue;
             }
-                playerHand[k] = playerTiles[i];
-                k++;
+            playerHand[k] = playerTiles[i];
+            k++;
         }
-        playerTiles = null;
         playerTiles = playerHand;
         numberOfTiles--;   
 
-        return playerTiles[index];
+        return removedTile;
     }
 
     /*
@@ -113,10 +113,6 @@ public class Player {
                     playerTiles[i + 1] = t;
                 }
             }
-        }
-
-        if(numberOfTiles > 14){
-            System.out.println();
         }
 
         if (!inserted && numberOfTiles != 0){
